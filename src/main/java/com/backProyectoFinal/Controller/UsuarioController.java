@@ -1,0 +1,81 @@
+package com.backProyectoFinal.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioCreate;
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioDto;
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEdit;
+import com.backProyectoFinal.Service.UsuarioService;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+
+
+@RestController
+@CrossOrigin("*")
+@RequestMapping("usuario")
+public class UsuarioController {
+
+@Autowired
+UsuarioService usuarioService;
+
+@PostMapping("")
+public ResponseEntity crear(@RequestBody UsuarioCreate dto) {
+    
+    try {
+        return ResponseEntity.ok().body(usuarioService.crear(dto));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
+    }
+
+}
+@PutMapping("/{id}")
+public ResponseEntity editar(@PathVariable Long id, @RequestBody UsuarioEdit dto) {
+     try {
+        return ResponseEntity.ok().body(usuarioService.edit(id,dto));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
+    }
+}
+@GetMapping("")
+public ResponseEntity traerTodos() {
+        try {
+        return ResponseEntity.ok().body(usuarioService.traerTodos());
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
+    }
+}
+@GetMapping("/{id}")
+public ResponseEntity buscarId(@PathVariable Long id) {
+        try {
+        return ResponseEntity.ok().body(usuarioService.buscaId(id));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
+    }
+}
+
+@DeleteMapping("/{id}")
+public ResponseEntity eliminar(@PathVariable Long id){
+        try {
+        usuarioService.eliminar(id);
+        return ResponseEntity.ok().body("Usuario eliminado correctamente");
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
+    }
+}
+
+
+
+
+}
