@@ -21,7 +21,7 @@ public class Usuario extends Base{
     private String nombre;
     private String apellido;
     private String email;
-    private int celular;
+    private Long celular;
     private String contrasenia;
 
     @Builder.Default

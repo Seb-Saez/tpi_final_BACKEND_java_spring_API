@@ -3,6 +3,7 @@ package com.backProyectoFinal.Impl;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,28 @@ public class UsuarioServiceImp implements UsuarioService{
         u.setEliminado(true);
         usuarioRepository.save(u);
     }
+
+    @Override
+    public UsuarioEditEmergencia verificarLogin(UsuarioEditEmergencia dto) {
+        Usuario u = usuarioRepository.findByEmail(dto.getEmail());
+        if(u != null){
+            return UsuarioMapper.toLoginDto(u);
+        } else{
+            throw new RuntimeException("No se encontro un usuario con ese Email");
+        }
+
+    }
+/*    En este endpoint hacemos la validacion de las contraseñas en el if
+    @Override
+    public UsuarioEditEmergencia verificarLogin(UsuarioEditEmergencia dto) {
+        Usuario u = usuarioRepository.findByEmail(dto.getEmail());
+        if(u != null && u.getContrasenia() == dto.getContrasenia()){
+            return UsuarioMapper.toLoginDto(u);
+        } else{
+            throw new RuntimeException("No se encontro un usuario con ese Email");
+        }
+
+    }
+*/
 
 }

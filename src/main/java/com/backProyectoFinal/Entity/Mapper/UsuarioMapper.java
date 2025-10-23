@@ -1,5 +1,6 @@
 package com.backProyectoFinal.Entity.Mapper;
 
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
 import com.backProyectoFinal.Entity.Usuario;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioCreate;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioDto;
@@ -25,5 +26,12 @@ public abstract class UsuarioMapper {
             .contrasenia(dto.getContrasenia())
             .email(dto.getEmail())
             .build();
+    }
+
+    public static UsuarioEditEmergencia toLoginDto (Usuario u){
+        return new UsuarioEditEmergencia().builder()
+                .email(u.getEmail())
+                .contrasenia(u.getContrasenia())
+                .build();
     }
 }

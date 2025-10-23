@@ -1,6 +1,8 @@
 package com.backProyectoFinal.Controller;
 
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -75,6 +77,23 @@ public ResponseEntity eliminar(@PathVariable Long id){
     }
 }
 
+    @PostMapping("/login")
+    public ResponseEntity verificarLogin(@RequestBody UsuarioEditEmergencia dto){
+        try {
+            UsuarioEditEmergencia usuario = usuarioService.verificarLogin(dto);
+
+            if(usuario != null && dto.getContrasenia().equals(usuario.getContrasenia())){
+                return ResponseEntity.ok("Usuario logeado correctamente");
+            }
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Usuario o contraseña incorrectos");
+
+        } catch (Exception e){
+            return ResponseEntity.badRequest()
+                    .body("Ocurrio un error al verificar el login del usuario: " + e.getMessage());
+        }
+    }
 
 
 

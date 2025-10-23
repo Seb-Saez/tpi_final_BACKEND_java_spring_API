@@ -11,4 +11,5 @@ import com.backProyectoFinal.Entity.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
     public List<Usuario> findAllByEliminadoFalse();
+    public Usuario findByEmail(String email);
 }

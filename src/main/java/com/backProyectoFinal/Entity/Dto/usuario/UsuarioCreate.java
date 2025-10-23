@@ -19,7 +19,7 @@ public class UsuarioCreate {
      private String nombre;
     private String apellido;
     private String email;
-    private int celular;
+    private Long celular;
     private String contrasenia;
-    private Rol rol;
+   // private Rol rol;
 }

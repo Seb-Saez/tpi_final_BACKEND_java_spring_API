@@ -15,5 +15,5 @@ public class UsuarioEdit {
 
     private String nombre;
     private String apellido;
-    private int celular;
+    private Long celular;
 }
