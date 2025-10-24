@@ -21,6 +21,8 @@ public class UsuarioServiceImp implements UsuarioService{
     @Autowired
     UsuarioRepository usuarioRepository;
 
+
+    // metodo para crear un usuario
     @Override
     public UsuarioDto crear(UsuarioCreate dto) {
     Usuario usuario = UsuarioMapper.toEntity(dto);
