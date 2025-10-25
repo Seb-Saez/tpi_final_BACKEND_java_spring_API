@@ -80,14 +80,8 @@ public ResponseEntity eliminar(@PathVariable Long id){
     @PostMapping("/login")
     public ResponseEntity verificarLogin(@RequestBody UsuarioEditEmergencia dto){
         try {
-            UsuarioEditEmergencia usuario = usuarioService.verificarLogin(dto);
-
-            if(usuario != null && dto.getContrasenia().equals(usuario.getContrasenia())){
-                return ResponseEntity.ok("Usuario logeado correctamente");
-            }
-
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Usuario o contraseña incorrectos");
+            usuarioService.verificarLogin(dto);
+            return ResponseEntity.ok().body("Usuario loggeado correctamente...");
 
         } catch (Exception e){
             return ResponseEntity.badRequest()

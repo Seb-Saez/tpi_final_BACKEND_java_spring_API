@@ -5,7 +5,11 @@ import java.util.stream.Collectors;
 
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import com.backProyectoFinal.Entity.Usuario;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioCreate;
@@ -20,10 +24,16 @@ public class UsuarioServiceImp implements UsuarioService{
 
     @Autowired
     UsuarioRepository usuarioRepository;
+      private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public UsuarioDto crear(UsuarioCreate dto) {
+    // Validamos que no exista un email
+    if(usuarioRepository.findByEmail(dto.getEmail())!=null){
+        throw new RuntimeException("Ya existe un usuario registrado con ese email");
+    }
     Usuario usuario = UsuarioMapper.toEntity(dto);
+    usuario.setContrasenia(passwordEncoder.encode(dto.getContrasenia()));
     usuarioRepository.save(usuario);
     return UsuarioMapper.toDto(usuario);
     }
@@ -64,14 +74,36 @@ public class UsuarioServiceImp implements UsuarioService{
 
     @Override
     public UsuarioEditEmergencia verificarLogin(UsuarioEditEmergencia dto) {
+
         Usuario u = usuarioRepository.findByEmail(dto.getEmail());
-        if(u != null){
+
+            if(u == null){
+               throw new RuntimeException("No se encontro un usuario con ese Email"); 
+            }
+             else if(u != null && !(passwordEncoder.matches(dto.getContrasenia(), u.getContrasenia()))){
+                throw new RuntimeException("La contraseña no coincide"); 
+            }
+        else{
             return UsuarioMapper.toLoginDto(u);
-        } else{
-            throw new RuntimeException("No se encontro un usuario con ese Email");
         }
 
     }
+/*
+
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+
+usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+passwordEncoder.matches(passwordIngresada, usuario.getPassword());
+
+
+*/ 
+
+
+
 /*    En este endpoint hacemos la validacion de las contraseñas en el if
     @Override
     public UsuarioEditEmergencia verificarLogin(UsuarioEditEmergencia dto) {
