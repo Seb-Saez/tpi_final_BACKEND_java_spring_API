@@ -26,6 +26,8 @@ public class UsuarioServiceImp implements UsuarioService{
     UsuarioRepository usuarioRepository;
       private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+
+    // metodo para crear un usuario
     @Override
     public UsuarioDto crear(UsuarioCreate dto) {
     // Validamos que no exista un email
