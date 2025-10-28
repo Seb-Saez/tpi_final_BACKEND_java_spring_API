@@ -45,7 +45,7 @@ public ResponseEntity crear(@RequestBody UsuarioCreate dto) {
 
 }
 
-// Edatar un usuario por ID
+// Editar un usuario por ID
 @PutMapping("/{id}")
 public ResponseEntity editar(@PathVariable Long id, @RequestBody UsuarioEdit dto) {
      try {
