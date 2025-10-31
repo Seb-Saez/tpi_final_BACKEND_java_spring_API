@@ -1,19 +1,19 @@
-package com.backProyectoFinal.Entity;
+package com.backProyectoFinal.Entity.Dto.producto;
 
 import com.backProyectoFinal.Entity.Enum.EstadoProducto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
 
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
-public class Producto extends Base {
+@Builder
+public class ProductoMostrar {
 
     private String nombre;
     private String descripcion;
@@ -21,7 +21,4 @@ public class Producto extends Base {
     private  double precio;
     private int stock;
     private EstadoProducto estado;
-
-
-
 }

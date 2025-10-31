@@ -4,6 +4,7 @@ import com.backProyectoFinal.Entity.Categoria;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaCreate;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaDto;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaEdit;
+import com.backProyectoFinal.Entity.Dto.categoria.CategoriaMostrar;
 import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 import com.backProyectoFinal.Entity.Mapper.CategoriaMapper;
 import com.backProyectoFinal.Entity.Producto;
@@ -50,20 +51,20 @@ public class CategoriaServiceImp implements CategoriaService {
     }
 
     @Override
-    public CategoriaDto buscaId(Long id) {
+    public CategoriaMostrar buscaId(Long id) {
 
         Categoria categoria = buscarPorId(id);
 
-        return CategoriaMapper.toDto(categoria);
+        return CategoriaMapper.toDtoMostrar(categoria);
     }
 
     @Override
-    public Set<CategoriaDto> traerTodos() {
+    public Set<CategoriaMostrar> traerTodos() {
         // busco un set de entidades Categoria, que tengan elimina en false
         Set<Categoria> categorias = categoriaRepository.findByEliminadoFalse();
         // retorno directamente ese set lo paso a stream, mapeo cada uno pasandolo a DTO y colecto
         return categorias.stream()
-                .map(CategoriaMapper::toDto)
+                .map(CategoriaMapper::toDtoMostrar)
                 .collect(Collectors.toSet());
 
     }

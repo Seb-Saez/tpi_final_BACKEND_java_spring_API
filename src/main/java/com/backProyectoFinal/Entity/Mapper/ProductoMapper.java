@@ -2,6 +2,7 @@ package com.backProyectoFinal.Entity.Mapper;
 
 import com.backProyectoFinal.Entity.Dto.producto.ProductoCreate;
 import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
+import com.backProyectoFinal.Entity.Dto.producto.ProductoMostrar;
 import com.backProyectoFinal.Entity.Producto;
 
 public class ProductoMapper {
@@ -27,6 +28,16 @@ public class ProductoMapper {
                 .build();
     }
 
+     public static ProductoMostrar toDtoMostrar(Producto p){
+        return new ProductoMostrar().builder()
+                .nombre(p.getNombre())
+                .descripcion(p.getDescripcion())
+                .imagen(p.getImagen())
+                .precio(p.getPrecio())
+                .stock(p.getStock())
+                .estado(p.getEstado())
+                .build();
+    }
 
 
 

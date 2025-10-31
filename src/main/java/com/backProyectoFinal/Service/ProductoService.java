@@ -13,4 +13,10 @@ public interface ProductoService {
     public ProductoDto buscaId(Long id);
     public Set<ProductoDto> traerTodos();
     public void eliminar(Long id);
+    // Metodo para dar de baja/alta un producto
+    public ProductoDto cambiarDisponibilidad(Long id);
+    public ProductoDto aumentarStock(Long id, int cantidadAgregada);
+    public ProductoDto disminuirStock(Long id, int cantidadVendida);
+
+
 }

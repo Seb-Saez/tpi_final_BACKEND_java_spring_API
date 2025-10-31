@@ -1,5 +1,6 @@
 package com.backProyectoFinal.Entity.Dto.categoria;
 
+import com.backProyectoFinal.Entity.Producto;
 import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 import lombok.*;
 
@@ -15,4 +16,6 @@ public class CategoriaDto {
     private String imagen;
     private String nombre;
     private String descripcion;
+
+    private Set<ProductoDto> productos;
 }

@@ -81,6 +81,57 @@ public class ProductoServiceImp implements ProductoService {
 
     }
 
+    @Override
+        public ProductoDto cambiarDisponibilidad(Long id) {
+        Producto producto = buscarPorId(id);
+        producto.setEstado((producto.getEstado()==EstadoProducto.DISPONIBLE) ? (EstadoProducto.NODISPONIBLE): (EstadoProducto.DISPONIBLE));
+        productoRepository.save(producto);
+        return ProductoMapper.toDto(producto);
+        }
+
+    @Override
+public ProductoDto aumentarStock(Long id, int cantidadAgregada) {
+    Producto producto = buscarPorId(id);
+
+    if (cantidadAgregada <= 0) {
+        throw new IllegalArgumentException("La cantidad agregada debe ser mayor a cero");
+    }
+
+    producto.setStock(producto.getStock() + cantidadAgregada);
+
+    // Si el stock vuelve a ser mayor que 0, cambia el estado a disponible
+    if (producto.getStock() > 0 && producto.getEstado() == EstadoProducto.NODISPONIBLE) {
+        producto.setEstado(EstadoProducto.DISPONIBLE);
+    }
+
+    productoRepository.save(producto);
+    return ProductoMapper.toDto(producto);
+}
+
+
+@Override
+public ProductoDto disminuirStock(Long id, int cantidadVendida) {
+    Producto producto = buscarPorId(id);
+
+    if (cantidadVendida <= 0) {
+        throw new IllegalArgumentException("La cantidad vendida debe ser mayor a cero");
+    }
+
+    if (producto.getStock() < cantidadVendida) {
+        throw new IllegalStateException("No hay suficiente stock para realizar la venta");
+    }
+
+    producto.setStock(producto.getStock() - cantidadVendida);
+
+    // Si el stock llega a 0, cambia el estado automáticamente
+    if (producto.getStock() == 0) {
+        producto.setEstado(EstadoProducto.NODISPONIBLE);
+    }
+
+    productoRepository.save(producto);
+    return ProductoMapper.toDto(producto);
+}
+
 
     // aca hicimos el metodo findById para no repetir tanto las lineas de codigo
     public Producto buscarPorId(Long id){
@@ -88,4 +139,6 @@ public class ProductoServiceImp implements ProductoService {
                 .orElseThrow(()-> new NullPointerException("Producto no encontrado con el id: " + id));
         return producto;
     }
+
+    
 }

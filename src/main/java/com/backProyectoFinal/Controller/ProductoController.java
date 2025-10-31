@@ -74,6 +74,36 @@ public class ProductoController {
         }
     }
 
+      @PatchMapping("/{id}")
+    public ResponseEntity cambiarDisponibilidad(@PathVariable Long id) {
+        try {
+            
+            return ResponseEntity.ok().body(productoService.cambiarDisponibilidad(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
+        }
+    }
+
+    @PatchMapping("/{id}/disminuirStock")
+    // para probar /productos/1/disminuirStock?cantidad=2
+public ResponseEntity disminuirStock(@PathVariable Long id, @RequestParam int cantidad) {
+    try {
+        return ResponseEntity.ok(productoService.disminuirStock(id, cantidad));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+}
+
+@PatchMapping("/{id}/aumentarStock")
+    // para probar en postman /productos/1/aumentarStock?cantidad=10
+public ResponseEntity aumentarStock(@PathVariable Long id, @RequestParam int cantidad) {
+    try {
+        return ResponseEntity.ok(productoService.aumentarStock(id, cantidad));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+}
+
 
 
 }

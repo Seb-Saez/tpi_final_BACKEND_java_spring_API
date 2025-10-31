@@ -3,6 +3,7 @@ package com.backProyectoFinal.Service;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaCreate;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaDto;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaEdit;
+import com.backProyectoFinal.Entity.Dto.categoria.CategoriaMostrar;
 import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 
 import java.util.Set;
@@ -15,10 +16,10 @@ public interface CategoriaService {
     public CategoriaDto edit(Long id, CategoriaEdit dto);
 
     //buscar categoriaDto
-    public CategoriaDto buscaId(Long id);
+    public CategoriaMostrar buscaId(Long id);
 
     //traer todos los tipos de categorias Dto
-    public Set<CategoriaDto> traerTodos();
+    public Set<CategoriaMostrar> traerTodos();
 
     //eliminar por id
     public void eliminar(Long id);
