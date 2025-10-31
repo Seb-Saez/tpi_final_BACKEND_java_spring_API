@@ -92,8 +92,8 @@ public ResponseEntity eliminar(@PathVariable Long id){
     @PostMapping("/login")
     public ResponseEntity verificarLogin(@RequestBody UsuarioEditEmergencia dto){
         try {
-            usuarioService.verificarLogin(dto);
-            return ResponseEntity.ok().body("Usuario loggeado correctamente...");
+            
+            return ResponseEntity.ok().body(usuarioService.verificarLogin(dto));
 
         } catch (Exception e){
             return ResponseEntity.badRequest()

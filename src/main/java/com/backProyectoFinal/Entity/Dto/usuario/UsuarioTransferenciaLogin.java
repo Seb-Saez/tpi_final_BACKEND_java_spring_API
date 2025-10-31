@@ -13,23 +13,11 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+public class UsuarioTransferenciaLogin {
 
-public class UsuarioCreate {
-
-     private String nombre;
+    private String nombre;
     private String apellido;
     private String email;
     private Long celular;
-    private String contrasenia;
-   // private Rol rol;
+    private Rol rol;
 }
-/*
- {
-    "nombre":"alberto",
-    "apellido":"Cortez",
-    "email":"alberto@gmail",
-    "celular":12312313 ,
-    "contrasenia":"1234"
-
-}
- */

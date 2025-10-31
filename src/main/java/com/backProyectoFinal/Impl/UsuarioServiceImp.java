@@ -4,6 +4,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioTransferenciaLogin;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -75,7 +77,7 @@ public class UsuarioServiceImp implements UsuarioService{
     }
 
     @Override
-    public UsuarioEditEmergencia verificarLogin(UsuarioEditEmergencia dto) {
+    public UsuarioTransferenciaLogin verificarLogin(UsuarioEditEmergencia dto) {
 
         Usuario u = usuarioRepository.findByEmail(dto.getEmail());
 
@@ -86,7 +88,7 @@ public class UsuarioServiceImp implements UsuarioService{
                 throw new RuntimeException("La contraseña no coincide"); 
             }
         else{
-            return UsuarioMapper.toLoginDto(u);
+            return UsuarioMapper.enviarFront(u);
         }
 
     }

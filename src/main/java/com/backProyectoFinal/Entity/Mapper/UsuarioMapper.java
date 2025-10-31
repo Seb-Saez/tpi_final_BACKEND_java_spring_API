@@ -1,6 +1,7 @@
 package com.backProyectoFinal.Entity.Mapper;
 
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioTransferenciaLogin;
 import com.backProyectoFinal.Entity.Usuario;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioCreate;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioDto;
@@ -33,5 +34,14 @@ public abstract class UsuarioMapper {
                 .email(u.getEmail())
                 .contrasenia(u.getContrasenia())
                 .build();
+    }
+    public static UsuarioTransferenciaLogin enviarFront (Usuario u){
+               return new UsuarioTransferenciaLogin().builder()
+            .nombre(u.getNombre())
+            .apellido(u.getApellido())
+            .celular(u.getCelular())
+            .email(u.getEmail())
+            .rol(u.getRol())
+            .build();
     }
 }

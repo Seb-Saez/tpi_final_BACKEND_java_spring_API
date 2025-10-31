@@ -6,6 +6,7 @@ import com.backProyectoFinal.Entity.Dto.usuario.UsuarioCreate;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioDto;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEdit;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
+import com.backProyectoFinal.Entity.Dto.usuario.UsuarioTransferenciaLogin;
 
 
 public interface UsuarioService{
@@ -15,7 +16,7 @@ public interface UsuarioService{
     public UsuarioDto buscaId(Long id);
     public Set<UsuarioDto> traerTodos();
     public void eliminar(Long id);
-    public UsuarioEditEmergencia verificarLogin(UsuarioEditEmergencia dto);
+    public UsuarioTransferenciaLogin verificarLogin(UsuarioEditEmergencia dto);
     /*
     public Set<Pedido> traerPedidos(Long id);
     */
