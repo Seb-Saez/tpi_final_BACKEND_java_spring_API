@@ -1,6 +1,9 @@
 package com.backProyectoFinal.Entity.Dto.categoria;
 
+import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 import lombok.*;
+
+import java.util.Set;
 
 @Getter
 @Setter

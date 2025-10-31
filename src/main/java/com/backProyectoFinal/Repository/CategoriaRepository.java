@@ -1,6 +1,7 @@
 package com.backProyectoFinal.Repository;
 
 import com.backProyectoFinal.Entity.Categoria;
+import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +14,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     public Set<Categoria> findByEliminadoFalse();
 
 
-    boolean findByNombre(String nombre);
+    boolean existsByNombre(String nombre);
+
 }

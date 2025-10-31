@@ -29,4 +29,11 @@ public class Categoria extends Base {
     @OneToMany//(cascade = CascadeType.ALL)
     @JoinColumn(name = "producto_id")
     private List<Producto> productos;
+
+    public void agregarProducto(Producto producto){
+        this.productos.add(producto);
+    }
+    public void eliminarProducto(Producto producto){
+        this.productos.remove(producto);
+    }
 }

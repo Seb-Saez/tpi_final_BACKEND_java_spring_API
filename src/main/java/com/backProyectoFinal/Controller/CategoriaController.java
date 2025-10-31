@@ -1,11 +1,12 @@
 package com.backProyectoFinal.Controller;
 
+import com.backProyectoFinal.Entity.Dto.categoria.CategoriaCreate;
+import com.backProyectoFinal.Entity.Dto.categoria.CategoriaEdit;
 import com.backProyectoFinal.Service.CategoriaService;
+import com.backProyectoFinal.Service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
@@ -13,20 +14,80 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoriaController {
     @Autowired
     CategoriaService categoriaService;
-
+    @Autowired
+    private ProductoService productoService;
 
     //  CRUD Categoria
-// --Leer categoria
 
+//CREAR CATEGORIA
+@PostMapping("")
+    public ResponseEntity crear(@RequestBody CategoriaCreate dto){
 
-// --Crear categoria
+    try{
+        return ResponseEntity.ok().body(categoriaService.crear(dto));
+    }catch(Exception e){
+        return ResponseEntity.badRequest().body("Ocurrió un error:"+ e.getMessage());
+    }
+}
+//EDITAR CATEGORIA
+@PutMapping("/{id}")
+public ResponseEntity editar(@PathVariable Long id, @RequestBody CategoriaEdit dto){
+    try{
+        return ResponseEntity.ok().body(categoriaService.edit(id,dto));
+    }catch(Exception e){
+        return ResponseEntity.badRequest().body("Ocurrió un error:"+e.getMessage());
+    }
+}
+//TRAER TODOS LAS CATEGORIAS
+@GetMapping("")
+public ResponseEntity traerTodos(){
+    try{
+        return  ResponseEntity.ok(categoriaService.traerTodos());
+    }catch (Exception e){
+        return ResponseEntity.badRequest().body("Ocurrió un error:"+e.getMessage());
+    }
+}
+//BUSCAR LOS CATEGORIA POR ID
+@GetMapping("/{id}")
+public ResponseEntity buscarId(@PathVariable Long id){
+    try{
+        return  ResponseEntity.ok().body(categoriaService.buscaId(id));
+    }catch(Exception e){
+        return ResponseEntity.badRequest().body("Ocurrió un error:"+e.getMessage());
+    }
+}
 
+//ELIMINAR CATEGORIA POR ID
+@DeleteMapping("/{id}")
+public ResponseEntity eliminar(@PathVariable Long id){
+    try{
+        categoriaService.eliminar(id);
+        return ResponseEntity.ok().body(" Categoria eliminada correctamente");
+    }catch(Exception e){
+        return ResponseEntity.badRequest().body("Ocurrió un error"+e.getMessage());
+    }
+}
+//AGREGAR Producto dentro de la categoria
+@PostMapping("/agregarProducto")
+public  ResponseEntity agregarProducto(@RequestParam Long IdCategoria, @RequestParam Long IdProducto){
 
-// --Actualizar categoria
+    try{
+        categoriaService.agregarProducto(IdCategoria, IdProducto);
+        return  ResponseEntity.ok().body("Producto agregado correctamente");
+    }catch(Exception e){
+        return  ResponseEntity.badRequest().body("Ocurrió un error:"+ e.getMessage());
+    }
+}
+//ELIMINAR Producto dentro de la categoria
+@PostMapping("/eliminarProducto?IdCategoria=IdCategoria&IdProducto=IdProducto")
+public ResponseEntity eliminarProducto(@RequestParam Long IdCategoria, @RequestParam Long IdProducto){
 
-
-// --Delete categoria
-
-
+    try{
+        categoriaService.eliminarProducto(IdCategoria,IdProducto);
+        return ResponseEntity.ok().body("Producto eliminado correctamente");
+    }catch(Exception e){
+        return ResponseEntity.badRequest().body("Ocurrió un error"+ e.getMessage());
+    }
+}
 
 }

@@ -4,8 +4,11 @@ import com.backProyectoFinal.Entity.Categoria;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaCreate;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaDto;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaEdit;
+import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 import com.backProyectoFinal.Entity.Mapper.CategoriaMapper;
+import com.backProyectoFinal.Entity.Producto;
 import com.backProyectoFinal.Repository.CategoriaRepository;
+import com.backProyectoFinal.Repository.ProductoRepository;
 import com.backProyectoFinal.Service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +22,13 @@ public class CategoriaServiceImp implements CategoriaService {
     @Autowired
     CategoriaRepository categoriaRepository;
 
+    @Autowired
+    ProductoServiceImp productoServiceImp;
+
     @Override
     public CategoriaDto crear(CategoriaCreate dto) {
         // Validamos que si lo encuentra no cree otra categoria con el mismo nombre
-        if(categoriaRepository.findByNombre(dto.getNombre())){
+        if(categoriaRepository.existsByNombre(dto.getNombre())){
             throw new RuntimeException("Ya existe una categoria con ese nombre, por favor use otro");
         }
         Categoria categoria = CategoriaMapper.toEntity(dto);
@@ -71,10 +77,29 @@ public class CategoriaServiceImp implements CategoriaService {
 
     }
 
+    @Override
+    public void agregarProducto(Long idCategoria, Long idProducto) {
+        Categoria categoria = buscarPorId(idCategoria);
+        Producto producto = productoServiceImp.buscarPorId(idProducto);
+
+        categoria.agregarProducto(producto);
+        categoriaRepository.save(categoria);
+    }
+    @Override
+    public void eliminarProducto(Long idCategoria, Long idProducto) {
+        Categoria categoria = buscarPorId(idCategoria);
+        Producto producto = productoServiceImp.buscarPorId(idProducto);
+
+        categoria.eliminarProducto(producto);
+        categoriaRepository.save(categoria);
+    }
+
     // aca hicimos el metodo findById para no repetir tanto las lineas de codigo
     public Categoria buscarPorId(Long id){
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(()-> new NullPointerException("Categoria no encontrada con el id: " + id));
         return categoria;
     }
+
+
 }
