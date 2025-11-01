@@ -16,7 +16,7 @@ import lombok.Setter;
 
 public class UsuarioCreate {
 
-     private String nombre;
+    private String nombre;
     private String apellido;
     private String email;
     private Long celular;
