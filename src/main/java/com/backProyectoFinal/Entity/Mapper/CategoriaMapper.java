@@ -12,18 +12,25 @@ import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 public class CategoriaMapper {
 
     public static CategoriaDto toDto(Categoria c){
-
-        return new CategoriaDto().builder()
+        if(c.getProductos()!=null){
+            return new CategoriaDto().builder()
                 .id(c.getId())
                 .imagen(c.getImagen())
                 .nombre(c.getNombre())
                 .descripcion(c.getDescripcion())
-
                 .productos(c.getProductos().stream()
                 .map(ProductoMapper::toDto)
                 .collect(Collectors.toSet()))
                 .build();
-    }
+        }  else{
+            return new CategoriaDto().builder()
+                .id(c.getId())
+                .imagen(c.getImagen())
+                .nombre(c.getNombre())
+                .descripcion(c.getDescripcion())
+                .build();
+        }
+        }
 
     public static Categoria toEntity (CategoriaCreate dto) {
 
