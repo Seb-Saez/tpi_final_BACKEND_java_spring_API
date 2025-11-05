@@ -3,6 +3,8 @@ package com.backProyectoFinal.Entity;
 import com.backProyectoFinal.Entity.Enum.Rol;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +26,7 @@ public class Usuario extends Base{
     private Long celular;
     private String contrasenia;
 
+    
     @Builder.Default
     private Rol rol = Rol.USUARIO ;
 

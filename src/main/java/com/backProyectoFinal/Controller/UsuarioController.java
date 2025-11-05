@@ -32,6 +32,8 @@ public class UsuarioController {
 @Autowired
 UsuarioService usuarioService;
 
+
+// Crear un usuario
 @PostMapping("")
 public ResponseEntity crear(@RequestBody UsuarioCreate dto) {
     
@@ -42,6 +44,8 @@ public ResponseEntity crear(@RequestBody UsuarioCreate dto) {
     }
 
 }
+
+// Editar un usuario por ID
 @PutMapping("/{id}")
 public ResponseEntity editar(@PathVariable Long id, @RequestBody UsuarioEdit dto) {
      try {
@@ -50,6 +54,8 @@ public ResponseEntity editar(@PathVariable Long id, @RequestBody UsuarioEdit dto
         return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
     }
 }
+
+// Traer todos los usuarios
 @GetMapping("")
 public ResponseEntity traerTodos() {
         try {
@@ -58,6 +64,8 @@ public ResponseEntity traerTodos() {
         return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
     }
 }
+
+// Traer un usuario por ID
 @GetMapping("/{id}")
 public ResponseEntity buscarId(@PathVariable Long id) {
         try {
@@ -67,6 +75,8 @@ public ResponseEntity buscarId(@PathVariable Long id) {
     }
 }
 
+
+// Eliminar un usuario por ID
 @DeleteMapping("/{id}")
 public ResponseEntity eliminar(@PathVariable Long id){
         try {
@@ -77,17 +87,13 @@ public ResponseEntity eliminar(@PathVariable Long id){
     }
 }
 
+
+// LOGIN de un usuario
     @PostMapping("/login")
     public ResponseEntity verificarLogin(@RequestBody UsuarioEditEmergencia dto){
         try {
-            UsuarioEditEmergencia usuario = usuarioService.verificarLogin(dto);
-
-            if(usuario != null && dto.getContrasenia().equals(usuario.getContrasenia())){
-                return ResponseEntity.ok("Usuario logeado correctamente");
-            }
-
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Usuario o contraseña incorrectos");
+            
+            return ResponseEntity.ok().body(usuarioService.verificarLogin(dto));
 
         } catch (Exception e){
             return ResponseEntity.badRequest()
