@@ -51,20 +51,20 @@ public class CategoriaServiceImp implements CategoriaService {
     }
 
     @Override
-    public CategoriaMostrar buscaId(Long id) {
+    public CategoriaDto buscaId(Long id) {
 
         Categoria categoria = buscarPorId(id);
 
-        return CategoriaMapper.toDtoMostrar(categoria);
+        return CategoriaMapper.toDto(categoria);
     }
 
     @Override
-    public Set<CategoriaMostrar> traerTodos() {
+    public Set<CategoriaDto> traerTodos() {
         // busco un set de entidades Categoria, que tengan elimina en false
         Set<Categoria> categorias = categoriaRepository.findByEliminadoFalse();
         // retorno directamente ese set lo paso a stream, mapeo cada uno pasandolo a DTO y colecto
         return categorias.stream()
-                .map(CategoriaMapper::toDtoMostrar)
+                .map(CategoriaMapper::toDto)
                 .collect(Collectors.toSet());
 
     }

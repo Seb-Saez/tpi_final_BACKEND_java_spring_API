@@ -16,10 +16,10 @@ public interface CategoriaService {
     public CategoriaDto edit(Long id, CategoriaEdit dto);
 
     //buscar categoriaDto
-    public CategoriaMostrar buscaId(Long id);
+    public CategoriaDto buscaId(Long id);
 
     //traer todos los tipos de categorias Dto
-    public Set<CategoriaMostrar> traerTodos();
+    public Set<CategoriaDto> traerTodos();
 
     //eliminar por id
     public void eliminar(Long id);

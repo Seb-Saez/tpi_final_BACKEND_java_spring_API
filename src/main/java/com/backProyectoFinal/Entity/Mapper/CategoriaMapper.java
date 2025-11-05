@@ -15,8 +15,8 @@ public class CategoriaMapper {
         if(c.getProductos()!=null){
             return new CategoriaDto().builder()
                 .id(c.getId())
-                .imagen(c.getImagen())
                 .nombre(c.getNombre())
+                .imagen(c.getImagen())
                 .descripcion(c.getDescripcion())
                 .productos(c.getProductos().stream()
                 .map(ProductoMapper::toDto)
