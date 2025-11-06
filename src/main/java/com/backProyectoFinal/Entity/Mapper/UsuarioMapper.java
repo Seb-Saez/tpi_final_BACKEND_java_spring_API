@@ -6,7 +6,7 @@ import com.backProyectoFinal.Entity.Usuario;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioCreate;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioDto;
 
-public abstract class UsuarioMapper {
+public class UsuarioMapper {
 
     public static UsuarioDto toDto(Usuario u){
         return new UsuarioDto().builder()

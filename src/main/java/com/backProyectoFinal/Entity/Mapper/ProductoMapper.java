@@ -28,6 +28,19 @@ public class ProductoMapper {
                 .build();
     }
 
+     public static Producto toEntity(ProductoDto dto){
+        return new Producto().builder()
+                .id(dto.getId())
+                .nombre(dto.getNombre())
+                .descripcion(dto.getDescripcion())
+                .imagen(dto.getImagen())
+                .precio(dto.getPrecio())
+                .stock(dto.getStock())
+                .estado(dto.getEstado())
+                .build();
+    }
+
+
      public static ProductoMostrar toDtoMostrar(Producto p){
         return new ProductoMostrar().builder()
                 .nombre(p.getNombre())

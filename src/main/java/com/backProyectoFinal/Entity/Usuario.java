@@ -1,10 +1,15 @@
 package com.backProyectoFinal.Entity;
 
+import java.util.List;
+
 import com.backProyectoFinal.Entity.Enum.Rol;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,8 +31,13 @@ public class Usuario extends Base{
     private Long celular;
     private String contrasenia;
 
-    
+    @Enumerated(EnumType.STRING)
     @Builder.Default
     private Rol rol = Rol.USUARIO ;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn( name = "usuario_id")
+    private List<Pedido> pedidos;
+
 
 }

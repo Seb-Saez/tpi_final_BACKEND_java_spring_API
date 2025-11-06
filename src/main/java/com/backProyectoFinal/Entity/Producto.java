@@ -20,6 +20,7 @@ public class Producto extends Base {
     private String imagen;
     private  double precio;
     private int stock;
+    @Enumerated(EnumType.STRING)
     private EstadoProducto estado;
 
 

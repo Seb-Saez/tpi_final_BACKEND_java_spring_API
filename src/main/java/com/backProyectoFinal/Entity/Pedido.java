@@ -10,6 +10,8 @@ import com.backProyectoFinal.Entity.Enum.EstadoPedido;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -32,11 +34,12 @@ public class Pedido extends Base{
     
     String fecha = ahora.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
 
+    @Enumerated(EnumType.STRING)
     @Builder.Default
     private EstadoPedido estado = EstadoPedido.PENDIENTE;
     private double total;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true )
     @JoinColumn( name = "pedido_id")
-    private List<DetallePedido> pedidos = new ArrayList<>();
+    private List<DetallePedido> detalles = new ArrayList<>();
 }

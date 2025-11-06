@@ -1,7 +1,10 @@
 package com.backProyectoFinal.Entity.Dto.pedido;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.backProyectoFinal.Entity.Dto.detallePedido.DetallePedidoDto;
 import com.backProyectoFinal.Entity.Enum.EstadoPedido;
 
 import lombok.AllArgsConstructor;
@@ -16,5 +19,5 @@ import lombok.Setter;
 @Builder
 public class PedidoCreate {
 
-    private double total;
+    private List<DetallePedidoDto> detalles = new ArrayList<>();
 }
