@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface ProductoService {
-    public ProductoDto crear(Long idCategoria,ProductoCreate dto);
+    public ProductoDto crear(ProductoCreate dto);
     public ProductoDto edit(Long id, ProductoEdit dto);
     public ProductoDto buscaId(Long id);
     public Set<ProductoDto> traerTodos();

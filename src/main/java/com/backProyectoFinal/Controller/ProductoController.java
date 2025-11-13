@@ -23,11 +23,11 @@ public class ProductoController {
     ProductoService productoService;
 
     // crear producto
-    @PostMapping("/crear")
-    public ResponseEntity crear(@RequestParam Long idCategoria, @RequestBody ProductoCreate dto) {
+    @PostMapping("")
+    public ResponseEntity crear(@RequestBody ProductoCreate dto) {
 
         try {
-            return ResponseEntity.ok().body(productoService.crear(idCategoria,dto));
+            return ResponseEntity.ok().body(productoService.crear(dto));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
         }

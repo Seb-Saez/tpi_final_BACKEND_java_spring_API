@@ -13,4 +13,5 @@ public class ProductoCreate {
     private String imagen;
     private double precio;
     private int stock;
+    private Long idCategoria;
 }

@@ -32,12 +32,16 @@ public class ProductoServiceImp implements ProductoService {
     // Crear un producto
     // Preguntar al profe ue validacion se puede hacer para crear un prooducto nuevo
     @Override
-    public ProductoDto crear(Long idCategoria, ProductoCreate dto) {
+    public ProductoDto crear(ProductoCreate dto) {
         Producto producto = ProductoMapper.toEntity(dto);
         // Operador ternario para verificar si el stock es mayor que 0 y setear el estado disponible
         producto.setEstado((producto.getStock() > 0) ? (EstadoProducto.DISPONIBLE): (EstadoProducto.NODISPONIBLE));
         //Buscamos la categoria
-        Categoria categoria = categoriaRepository.findById(idCategoria)
+        if (dto.getIdCategoria() == null) {
+            throw new IllegalArgumentException("Debe especificar una categoría válida para el producto.");
+            }
+
+        Categoria categoria = categoriaRepository.findById(dto.getIdCategoria())
             .orElseThrow(()-> new EntityNotFoundException());
         categoria.agregarProducto(productoRepository.save(producto));
         categoriaRepository.save(categoria);
