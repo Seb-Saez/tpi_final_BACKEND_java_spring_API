@@ -32,9 +32,9 @@ public class PedidoController {
 PedidoService pedidoService;
 
 @PostMapping("/crear/{idCliente}")
-public ResponseEntity crear(@PathVariable Long idCLiente, @RequestBody PedidoCreate dto) {
+public ResponseEntity crear(@PathVariable Long idCliente, @RequestBody PedidoCreate dto) {
    try {
-        return ResponseEntity.ok().body(pedidoService.crear(idCLiente, dto));
+        return ResponseEntity.ok().body(pedidoService.crear(idCliente, dto));
    } catch (Exception e) {
         return ResponseEntity.badRequest().body("No se pudo crer el pedido");
    }

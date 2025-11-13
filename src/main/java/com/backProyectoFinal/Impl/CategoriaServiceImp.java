@@ -5,7 +5,9 @@ import com.backProyectoFinal.Entity.Dto.categoria.CategoriaCreate;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaDto;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaEdit;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaMostrar;
+import com.backProyectoFinal.Entity.Dto.pedido.PedidoDto;
 import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
+import com.backProyectoFinal.Entity.Enum.EstadoPedido;
 import com.backProyectoFinal.Entity.Mapper.CategoriaMapper;
 import com.backProyectoFinal.Entity.Producto;
 import com.backProyectoFinal.Repository.CategoriaRepository;
@@ -14,6 +16,7 @@ import com.backProyectoFinal.Service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -101,6 +104,7 @@ public class CategoriaServiceImp implements CategoriaService {
                 .orElseThrow(()-> new NullPointerException("Categoria no encontrada con el id: " + id));
         return categoria;
     }
+
 
 
 }

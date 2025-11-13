@@ -4,8 +4,11 @@ import com.backProyectoFinal.Entity.Dto.categoria.CategoriaCreate;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaDto;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaEdit;
 import com.backProyectoFinal.Entity.Dto.categoria.CategoriaMostrar;
+import com.backProyectoFinal.Entity.Dto.pedido.PedidoDto;
 import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
+import com.backProyectoFinal.Entity.Enum.EstadoPedido;
 
+import java.util.List;
 import java.util.Set;
 
 public interface CategoriaService {
@@ -29,6 +32,10 @@ public interface CategoriaService {
 
     //método para eliminar un producto a la categoria
     public void eliminarProducto(Long idCategoria, Long idProducto);
+
+
+
+
 
 
 

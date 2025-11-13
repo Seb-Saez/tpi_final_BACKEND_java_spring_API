@@ -1,0 +1,259 @@
+{
+    "info": {
+        "name": "API Pizzería – Usuarios y Categorías",
+        "_postman_id": "b1a5b87c-34b5-4b5c-b6f2-usuarios",
+        "description": "Colección Postman para probar los endpoints del UsuarioController.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Crear usuario",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Carlos\",\n    \"apellido\": \"Ramirez\",\n    \"email\": \"carlos@gmail.com\",\n    \"celular\": 1122334455,\n    \"contrasenia\": \"carlos123\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/usuarios",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "usuarios"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Editar usuario",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Carlos Modificado\",\n    \"apellido\": \"Ramirez\",\n    \"celular\": 1199887766\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/usuarios/1",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "usuarios",
+                        "1"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Traer todos los usuarios",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:8080/usuarios",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "usuarios"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Buscar usuario por ID",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:8080/usuarios/1",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "usuarios",
+                        "1"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Eliminar usuario",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "http://localhost:8080/usuarios/1",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "usuarios",
+                        "1"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Login usuario",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"email\": \"carlos@gmail.com\",\n    \"contrasenia\": \"carlos123\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/usuarios/login",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "usuarios",
+                        "login"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Categorías",
+            "item": [
+                {
+                    "name": "Crear Categoría",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Pizzas\",\n    \"imagen\": \"pizzas.jpg\",\n    \"descripcion\": \"Variedad de pizzas artesanales\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/categorias",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "categorias"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Editar Categoría",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Pizzas Cl\\u00e1sicas\",\n    \"imagen\": \"clasicas.jpg\",\n    \"descripcion\": \"Pizzas tradicionales de la casa\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/categorias/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "categorias",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Traer Todas las Categorías",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/categorias",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "categorias"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Buscar Categoría por ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8080/categorias/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "categorias",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Eliminar Categoría",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8080/categorias/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "categorias",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

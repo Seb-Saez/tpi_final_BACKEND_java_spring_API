@@ -14,6 +14,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,9 +31,7 @@ import lombok.experimental.SuperBuilder;
 public class Pedido extends Base{
 
     
-    private LocalDateTime ahora = LocalDateTime.now();
-    
-    String fecha = ahora.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    private String fecha = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
@@ -42,4 +41,6 @@ public class Pedido extends Base{
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true )
     @JoinColumn( name = "pedido_id")
     private List<DetallePedido> detalles = new ArrayList<>();
+
+    
 }

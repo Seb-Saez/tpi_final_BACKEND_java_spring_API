@@ -5,9 +5,14 @@ import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 import com.backProyectoFinal.Entity.Dto.producto.ProductoEdit;
 import com.backProyectoFinal.Entity.Enum.EstadoProducto;
 import com.backProyectoFinal.Entity.Mapper.ProductoMapper;
+import com.backProyectoFinal.Entity.Categoria;
 import com.backProyectoFinal.Entity.Producto;
+import com.backProyectoFinal.Repository.CategoriaRepository;
 import com.backProyectoFinal.Repository.ProductoRepository;
 import com.backProyectoFinal.Service.ProductoService;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +24,22 @@ public class ProductoServiceImp implements ProductoService {
 
     @Autowired
     ProductoRepository productoRepository;
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
 
     // Crear un producto
     // Preguntar al profe ue validacion se puede hacer para crear un prooducto nuevo
     @Override
-    public ProductoDto crear(ProductoCreate dto) {
+    public ProductoDto crear(Long idCategoria, ProductoCreate dto) {
         Producto producto = ProductoMapper.toEntity(dto);
         // Operador ternario para verificar si el stock es mayor que 0 y setear el estado disponible
         producto.setEstado((producto.getStock() > 0) ? (EstadoProducto.DISPONIBLE): (EstadoProducto.NODISPONIBLE));
-        productoRepository.save(producto);
+        //Buscamos la categoria
+        Categoria categoria = categoriaRepository.findById(idCategoria)
+            .orElseThrow(()-> new EntityNotFoundException());
+        categoria.agregarProducto(productoRepository.save(producto));
+        categoriaRepository.save(categoria);
         return ProductoMapper.toDto(producto);
 
     }

@@ -1,0 +1,321 @@
+{
+  "info": {
+    "name": "Carga Inicial - Proyecto Final",
+    "_postman_id": "carga-inicial-leo",
+    "description": "Colección para crear datos iniciales en el backend del proyecto final",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1️⃣ Crear Categorías",
+      "item": [
+        {
+          "name": "Categoria - Pizzas",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/categorias",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Pizzas\", \"imagen\": \"https://cdn.example.com/categorias/pizzas.jpg\", \"descripcion\": \"Variedad de pizzas artesanales con los mejores ingredientes.\"}"
+            }
+          }
+        },
+        {
+          "name": "Categoria - Hamburguesas",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/categorias",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Hamburguesas\", \"imagen\": \"https://cdn.example.com/categorias/hamburguesas.jpg\", \"descripcion\": \"Jugosas hamburguesas caseras con distintos estilos.\"}"
+            }
+          }
+        },
+        {
+          "name": "Categoria - Acompañamientos",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/categorias",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Acompañamientos\", \"imagen\": \"https://cdn.example.com/categorias/acompanamientos.jpg\", \"descripcion\": \"Papas fritas, nuggets y otros complementos deliciosos.\"}"
+            }
+          }
+        },
+        {
+          "name": "Categoria - Bebidas",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/categorias",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Bebidas\", \"imagen\": \"https://cdn.example.com/categorias/bebidas.jpg\", \"descripcion\": \"Gaseosas, cervezas y jugos naturales para acompañar tus comidas.\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2️⃣ Crear Usuarios",
+      "item": [
+        {
+          "name": "Usuario - Juan Pérez",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/usuarios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Juan\", \"apellido\": \"Pérez\", \"email\": \"juan.perez@example.com\", \"celular\": 1122334455, \"contrasenia\": \"1234\"}"
+            }
+          }
+        },
+        {
+          "name": "Usuario - Ana López",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/usuarios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Ana\", \"apellido\": \"López\", \"email\": \"ana.lopez@example.com\", \"celular\": 2233445566, \"contrasenia\": \"1234\"}"
+            }
+          }
+        },
+        {
+          "name": "Usuario - Marcos Díaz",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/usuarios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Marcos\", \"apellido\": \"Díaz\", \"email\": \"marcos.diaz@example.com\", \"celular\": 3344556677, \"contrasenia\": \"1234\"}"
+            }
+          }
+        },
+        {
+          "name": "Usuario - Laura Gómez",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/usuarios",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Laura\", \"apellido\": \"Gómez\", \"email\": \"laura.gomez@example.com\", \"celular\": 4455667788, \"contrasenia\": \"1234\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3️⃣ Crear Productos",
+      "item": [
+        {
+          "name": "Pizza Muzzarella",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Pizza Muzzarella\", \"descripcion\": \"Pizza con muzzarella, tomate y orégano.\", \"imagen\": \"https://cdn.example.com/pizzas/muzzarella.jpg\", \"precio\": 4500, \"stock\": 30}"
+            }
+          }
+        },
+        {
+          "name": "Pizza Napolitana",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Pizza Napolitana\", \"descripcion\": \"Con rodajas de tomate y ajo fresco.\", \"imagen\": \"https://cdn.example.com/pizzas/napolitana.jpg\", \"precio\": 4800, \"stock\": 25}"
+            }
+          }
+        },
+        {
+          "name": "Pizza Calabresa",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Pizza Calabresa\", \"descripcion\": \"Longaniza picante y muzzarella.\", \"imagen\": \"https://cdn.example.com/pizzas/calabresa.jpg\", \"precio\": 5500, \"stock\": 20}"
+            }
+          }
+        },
+        {
+          "name": "Hamburguesa Clásica",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Hamburguesa Clásica\", \"descripcion\": \"Pan, carne, lechuga, tomate y cheddar.\", \"imagen\": \"https://cdn.example.com/hamburguesas/clasica.jpg\", \"precio\": 3800, \"stock\": 25}"
+            }
+          }
+        },
+        {
+          "name": "Hamburguesa BBQ",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Hamburguesa BBQ\", \"descripcion\": \"Con salsa barbacoa y panceta crocante.\", \"imagen\": \"https://cdn.example.com/hamburguesas/bbq.jpg\", \"precio\": 4200, \"stock\": 15}"
+            }
+          }
+        },
+        {
+          "name": "Hamburguesa Doble",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Hamburguesa Doble\", \"descripcion\": \"Doble carne y doble cheddar.\", \"imagen\": \"https://cdn.example.com/hamburguesas/doble.jpg\", \"precio\": 4700, \"stock\": 18}"
+            }
+          }
+        },
+        {
+          "name": "Papas Fritas",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Papas Fritas\", \"descripcion\": \"Papas doradas crocantes.\", \"imagen\": \"https://cdn.example.com/acompanamientos/papas.jpg\", \"precio\": 1500, \"stock\": 40}"
+            }
+          }
+        },
+        {
+          "name": "Nuggets de Pollo",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Nuggets de Pollo\", \"descripcion\": \"6 unidades de nuggets caseros.\", \"imagen\": \"https://cdn.example.com/acompanamientos/nuggets.jpg\", \"precio\": 2200, \"stock\": 25}"
+            }
+          }
+        },
+        {
+          "name": "Aros de Cebolla",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Aros de Cebolla\", \"descripcion\": \"Crujientes aros rebozados.\", \"imagen\": \"https://cdn.example.com/acompanamientos/aros.jpg\", \"precio\": 1800, \"stock\": 30}"
+            }
+          }
+        },
+        {
+          "name": "Coca Cola 500ml",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Coca Cola 500ml\", \"descripcion\": \"Bebida gaseosa original.\", \"imagen\": \"https://cdn.example.com/bebidas/cocacola.jpg\", \"precio\": 1200, \"stock\": 50}"
+            }
+          }
+        },
+        {
+          "name": "Agua Mineral",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Agua Mineral\", \"descripcion\": \"Sin gas, botella 500ml.\", \"imagen\": \"https://cdn.example.com/bebidas/agua.jpg\", \"precio\": 900, \"stock\": 40}"
+            }
+          }
+        },
+        {
+          "name": "Cerveza Rubia",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/productos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\": \"Cerveza Rubia\", \"descripcion\": \"Botella 1L artesanal.\", \"imagen\": \"https://cdn.example.com/bebidas/cerveza.jpg\", \"precio\": 2300, \"stock\": 35}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4️⃣ Crear Pedidos",
+      "item": [
+        {
+          "name": "Pedido Usuario 1",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/pedidos/crear/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"detalles\": [{\"cantidad\": 2, \"productoId\": 1}, {\"cantidad\": 1, \"productoId\": 10}]}"
+            }
+          }
+        },
+        {
+          "name": "Pedido Usuario 2",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/pedidos/crear/2",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"detalles\": [{\"cantidad\": 1, \"productoId\": 4}, {\"cantidad\": 2, \"productoId\": 7}]}"
+            }
+          }
+        },
+        {
+          "name": "Pedido Usuario 3",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/pedidos/crear/3",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"detalles\": [{\"cantidad\": 3, \"productoId\": 11}, {\"cantidad\": 1, \"productoId\": 3}]}"
+            }
+          }
+        },
+        {
+          "name": "Pedido Usuario 4",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/pedidos/crear/4",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"detalles\": [{\"cantidad\": 2, \"productoId\": 2}, {\"cantidad\": 2, \"productoId\": 5}, {\"cantidad\": 1, \"productoId\": 9}]}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" }
+  ]
+}

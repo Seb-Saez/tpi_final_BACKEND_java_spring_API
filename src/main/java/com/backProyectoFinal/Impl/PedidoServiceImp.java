@@ -1,12 +1,16 @@
 package com.backProyectoFinal.Impl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.backProyectoFinal.Entity.DetallePedido;
 import com.backProyectoFinal.Entity.Pedido;
+import com.backProyectoFinal.Entity.Producto;
 import com.backProyectoFinal.Entity.Usuario;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoCreate;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoDto;
@@ -16,18 +20,24 @@ import com.backProyectoFinal.Entity.Mapper.DetallePedidoMapper;
 import com.backProyectoFinal.Entity.Mapper.PedidoMapper;
 import com.backProyectoFinal.Entity.Mapper.ProductoMapper;
 import com.backProyectoFinal.Repository.PedidoRepository;
+import com.backProyectoFinal.Repository.ProductoRepository;
 import com.backProyectoFinal.Repository.UsuarioRepository;
 import com.backProyectoFinal.Service.PedidoService;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 @Service
 public class PedidoServiceImp implements PedidoService{
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    @Autowired
     private UsuarioRepository usuarioRepository;
-   
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    @Transactional
     @Override
     public PedidoDto crear(Long idCliente, PedidoCreate dto) {
 
@@ -44,20 +54,32 @@ public class PedidoServiceImp implements PedidoService{
             .map(detalleDto->{
                 DetallePedido detalle = new DetallePedido();
                 detalle.setCantidad(detalleDto.getCantidad());
-                detalle.setProducto(ProductoMapper.toEntity(detalleDto.getProductoDto()));
+                Producto producto = productoRepository.findById(detalleDto.getProductoId())
+                                    .orElseThrow(()->new EntityNotFoundException("No se encontro un producto con el id: "+ detalleDto.getProductoId()));
+                if (detalleDto.getCantidad() <= producto.getStock()) {
+                    producto.setStock(producto.getStock() - detalleDto.getCantidad());
+                    productoRepository.save(producto);
+                } else {
+                    throw new IllegalArgumentException("No hay cantidad suficiente en el stock para este pedido.");
+                }
+
+                detalle.setProducto(producto);
+
                 detalle.setSubtotal(detalle.getCantidad() * detalle.getProducto().getPrecio());
                 return detalle;
-            })
+                })
             .toList();
         pedido.setDetalles(detalles);
 
-        // Calculamos y setteamos el total del pedido con stream B)
+        // Calculamos y setteamos el total del pedido con stream
         double total = pedido.getDetalles().stream()
             .mapToDouble(DetallePedido::getSubtotal)
             .sum();
+        
+
 
         pedido.setTotal(total);
-        pedidoRepository.save(pedido);
+        pedido.setFecha(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
         usuario.getPedidos().add(pedido);
         usuarioRepository.save(usuario);
 
@@ -119,12 +141,20 @@ public class PedidoServiceImp implements PedidoService{
     //-------------------------------------------------------------------------------------
     // creo un metodo extra para cambiar el estado
     //-------------------------------------------------------------------------------------
+    @Transactional
     @Override
     public PedidoDto cambiarEstado(Long id, EstadoPedido estado){
         Pedido pedido = buscarPorId(id);
         if (pedido.getEstado() == estado) {
             throw new IllegalArgumentException("El pedido ya se encuentra en el estado " + estado);
             }
+        if (estado == EstadoPedido.CANCELADO){
+            pedido.getDetalles().forEach(det -> {
+            Producto producto = det.getProducto();
+            producto.setStock(producto.getStock() + det.getCantidad());
+            productoRepository.save(producto);
+            });
+        }
         pedido.setEstado(estado);
         pedidoRepository.save(pedido);
         return PedidoMapper.toDto(pedido);

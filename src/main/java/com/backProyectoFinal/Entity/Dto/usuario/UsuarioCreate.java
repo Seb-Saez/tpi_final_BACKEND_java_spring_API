@@ -21,7 +21,6 @@ public class UsuarioCreate {
     private String email;
     private Long celular;
     private String contrasenia;
-   // private Rol rol;
 }
 /*
  {

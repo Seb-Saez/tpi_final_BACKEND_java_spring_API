@@ -16,5 +16,5 @@ import lombok.Setter;
 public class DetallePedidoCreate {
     
     private int cantidad;
-    private Producto producto;
+    private Long productoId;
 }

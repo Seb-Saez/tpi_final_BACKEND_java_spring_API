@@ -6,6 +6,9 @@ import com.backProyectoFinal.Entity.Dto.usuario.UsuarioCreate;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEdit;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
 import com.backProyectoFinal.Service.ProductoService;
+
+import jakarta.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +17,17 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 @RestController
 public class ProductoController {
-// Crud Producto (Seba escribió esto)
 
     //inyecta el servicio para interactuar con la base de datos
 @Autowired
     ProductoService productoService;
 
     // crear producto
-    @PostMapping("")
-    public ResponseEntity crear(@RequestBody ProductoCreate dto) {
+    @PostMapping("/crear")
+    public ResponseEntity crear(@RequestParam Long idCategoria, @RequestBody ProductoCreate dto) {
 
         try {
-            return ResponseEntity.ok().body(productoService.crear(dto));
+            return ResponseEntity.ok().body(productoService.crear(idCategoria,dto));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
         }
