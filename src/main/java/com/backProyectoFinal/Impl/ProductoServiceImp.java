@@ -16,6 +16,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -149,6 +150,16 @@ public ProductoDto disminuirStock(Long id, int cantidadVendida) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(()-> new NullPointerException("Producto no encontrado con el id: " + id));
         return producto;
+    }
+
+    @Override
+    public List<ProductoDto> traerPorCategoria(Long idCategoria) {
+
+           return productoRepository.findByCategoriaId(idCategoria)
+            .stream()
+            .map(ProductoMapper::toDto)
+            .toList();
+            
     }
 
     

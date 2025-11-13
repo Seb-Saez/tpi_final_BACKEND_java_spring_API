@@ -1,6 +1,7 @@
 package com.backProyectoFinal.Entity;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -25,6 +26,7 @@ import java.util.Set;
 public class Categoria extends Base {
 
     private String nombre;
+    @Column(length = 1000)
     private String imagen;
     private String descripcion;
 

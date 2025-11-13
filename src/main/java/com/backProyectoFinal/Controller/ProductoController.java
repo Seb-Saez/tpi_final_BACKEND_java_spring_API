@@ -64,6 +64,15 @@ public class ProductoController {
         }
     }
 
+    @GetMapping("/categoria/{idCategoria}")
+    public ResponseEntity traerPorCategoria(@PathVariable Long idCategoria) {
+        try {
+            return ResponseEntity.ok(productoService.traerPorCategoria(idCategoria));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Ocurrió un error: " + e.getMessage());
+    }
+}
+
 
     // Eliminar un producto por ID
     @DeleteMapping("/{id}")

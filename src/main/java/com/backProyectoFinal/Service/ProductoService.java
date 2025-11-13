@@ -5,6 +5,7 @@ import com.backProyectoFinal.Entity.Dto.producto.ProductoDto;
 import com.backProyectoFinal.Entity.Dto.producto.ProductoEdit;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 public interface ProductoService {
@@ -17,6 +18,6 @@ public interface ProductoService {
     public ProductoDto cambiarDisponibilidad(Long id);
     public ProductoDto aumentarStock(Long id, int cantidadAgregada);
     public ProductoDto disminuirStock(Long id, int cantidadVendida);
-
+    public List<ProductoDto> traerPorCategoria(Long idCategoria);
 
 }
