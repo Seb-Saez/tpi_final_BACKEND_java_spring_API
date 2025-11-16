@@ -1,10 +1,12 @@
 package com.backProyectoFinal.Entity.Dto.pedido;
 
+import java.lang.ProcessHandle.Info;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.backProyectoFinal.Entity.DetallePedido;
 import com.backProyectoFinal.Entity.Dto.detallePedido.DetallePedidoDto;
+import com.backProyectoFinal.Entity.Dto.infoEntrega.InfoEntregaDto;
 import com.backProyectoFinal.Entity.Enum.EstadoPedido;
 
 import jakarta.persistence.CascadeType;
@@ -27,4 +29,5 @@ public class PedidoDto {
     private EstadoPedido estado;
     private double total;
     private List <DetallePedidoDto> detalles;
+    private InfoEntregaDto infoEntrega;
 }

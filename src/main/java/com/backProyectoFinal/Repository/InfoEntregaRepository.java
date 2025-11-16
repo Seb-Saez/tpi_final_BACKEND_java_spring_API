@@ -8,7 +8,7 @@ import com.backProyectoFinal.Entity.Dto.infoEntrega.InfoEntregaDto;
 
 public interface InfoEntregaRepository extends JpaRepository<InfoEntrega,Long>{
     
-   InfoEntregaDto findByPedidoId(Long idPedido);
+   InfoEntrega findByPedidoId(Long idPedido);
 
 
 }

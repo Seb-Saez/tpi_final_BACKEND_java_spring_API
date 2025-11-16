@@ -1,5 +1,6 @@
 package com.backProyectoFinal.Impl;
 
+import java.lang.ProcessHandle.Info;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -14,6 +15,7 @@ import com.backProyectoFinal.Entity.Pedido;
 import com.backProyectoFinal.Entity.Producto;
 import com.backProyectoFinal.Entity.Usuario;
 import com.backProyectoFinal.Entity.Dto.infoEntrega.InfoEntregaCreate;
+import com.backProyectoFinal.Entity.Dto.infoEntrega.InfoEntregaDto;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoCreate;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoCreateCompleto;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoDto;
@@ -132,7 +134,14 @@ public class PedidoServiceImp implements PedidoService{
     @Override
     public PedidoDto buscaId(Long id) {
         Pedido pedido = buscarPorId(id);
-        return PedidoMapper.toDto(pedido);
+        PedidoDto pedidoDto = PedidoMapper.toDto(pedido);
+        
+        InfoEntrega infoEntrega = infoEntregaRepository.findByPedidoId(id);
+        if(infoEntrega != null){
+            pedidoDto.setInfoEntrega(InfoEntregMapper.toDto(infoEntrega));
+        }
+        
+        return pedidoDto;
     }
 
     @Override
