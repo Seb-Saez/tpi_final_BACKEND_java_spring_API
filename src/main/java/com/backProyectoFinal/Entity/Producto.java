@@ -1,6 +1,7 @@
 package com.backProyectoFinal.Entity;
 
 import com.backProyectoFinal.Entity.Enum.EstadoProducto;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -17,6 +18,7 @@ public class Producto extends Base {
 
     private String nombre;
     private String descripcion;
+    @Column(length = 1000)
     private String imagen;
     private  double precio;
     private int stock;
