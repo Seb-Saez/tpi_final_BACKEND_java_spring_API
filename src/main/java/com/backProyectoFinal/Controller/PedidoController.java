@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoCreate;
+import com.backProyectoFinal.Entity.Dto.pedido.PedidoCreateCompleto;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoEdit;
 import com.backProyectoFinal.Entity.Enum.EstadoPedido;
 import com.backProyectoFinal.Service.PedidoService;
@@ -32,7 +33,7 @@ public class PedidoController {
 PedidoService pedidoService;
 
 @PostMapping("/crear/{idCliente}")
-public ResponseEntity crear(@PathVariable Long idCliente, @RequestBody PedidoCreate dto) {
+public ResponseEntity crear(@PathVariable Long idCliente, @RequestBody PedidoCreateCompleto dto) {
    try {
         return ResponseEntity.ok().body(pedidoService.crear(idCliente, dto));
    } catch (Exception e) {

@@ -9,16 +9,21 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.backProyectoFinal.Entity.DetallePedido;
+import com.backProyectoFinal.Entity.InfoEntrega;
 import com.backProyectoFinal.Entity.Pedido;
 import com.backProyectoFinal.Entity.Producto;
 import com.backProyectoFinal.Entity.Usuario;
+import com.backProyectoFinal.Entity.Dto.infoEntrega.InfoEntregaCreate;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoCreate;
+import com.backProyectoFinal.Entity.Dto.pedido.PedidoCreateCompleto;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoDto;
 import com.backProyectoFinal.Entity.Dto.pedido.PedidoEdit;
 import com.backProyectoFinal.Entity.Enum.EstadoPedido;
 import com.backProyectoFinal.Entity.Mapper.DetallePedidoMapper;
+import com.backProyectoFinal.Entity.Mapper.InfoEntregMapper;
 import com.backProyectoFinal.Entity.Mapper.PedidoMapper;
 import com.backProyectoFinal.Entity.Mapper.ProductoMapper;
+import com.backProyectoFinal.Repository.InfoEntregaRepository;
 import com.backProyectoFinal.Repository.PedidoRepository;
 import com.backProyectoFinal.Repository.ProductoRepository;
 import com.backProyectoFinal.Repository.UsuarioRepository;
@@ -36,14 +41,15 @@ public class PedidoServiceImp implements PedidoService{
     private UsuarioRepository usuarioRepository;
     @Autowired
     private ProductoRepository productoRepository;
-
+    @Autowired
+    private InfoEntregaRepository infoEntregaRepository;
     @Transactional
     @Override
-    public PedidoDto crear(Long idCliente, PedidoCreate dto) {
+    public PedidoDto crear(Long idCliente, PedidoCreateCompleto dtoCompleto) {
 
         Usuario usuario = usuarioRepository.findById(idCliente)
             .orElseThrow(()->new EntityNotFoundException("No se encontro un cliente con el id: " + idCliente));
-    
+        PedidoCreate dto = dtoCompleto.getDto();
             if(dto.getDetalles()==null || dto.getDetalles().isEmpty()){
                 throw new IllegalArgumentException("No se puede crear un pedido sin detalles");
             }
@@ -81,7 +87,20 @@ public class PedidoServiceImp implements PedidoService{
         pedido.setTotal(total);
         pedido.setFecha(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
         usuario.getPedidos().add(pedido);
-        usuarioRepository.save(usuario);
+        
+        // trabajamos con infoEntrega
+        InfoEntregaCreate dtoInfo = dtoCompleto.getInfoEntrega();
+        InfoEntrega info = InfoEntregMapper.toEntity(dtoInfo);
+        // Consigo el ultimo pedido para settearlo en infoEntrega
+        Usuario usuarioPersistido =usuarioRepository.save(usuario);
+        List<Pedido> pedidos = usuarioPersistido.getPedidos();
+        Pedido ultimoPedido = pedidos.get(pedidos.size()-1);
+        
+        info.setPedido(ultimoPedido);
+
+        infoEntregaRepository.save(info);
+
+
 
         return PedidoMapper.toDto(pedido);
 
@@ -138,6 +157,7 @@ public class PedidoServiceImp implements PedidoService{
         return pedidos.stream().map(PedidoMapper::toDto).toList();
     }
 
+    
     //-------------------------------------------------------------------------------------
     // creo un metodo extra para cambiar el estado
     //-------------------------------------------------------------------------------------

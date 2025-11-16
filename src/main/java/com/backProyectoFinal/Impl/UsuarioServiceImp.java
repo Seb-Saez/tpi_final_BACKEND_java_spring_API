@@ -1,10 +1,12 @@
 package com.backProyectoFinal.Impl;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioTransferenciaLogin;
+import com.backProyectoFinal.Entity.Enum.EstadoPedido;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +16,11 @@ import org.springframework.stereotype.Service;
 
 
 import com.backProyectoFinal.Entity.Usuario;
+import com.backProyectoFinal.Entity.Dto.pedido.PedidoDto;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioCreate;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioDto;
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEdit;
+import com.backProyectoFinal.Entity.Mapper.PedidoMapper;
 import com.backProyectoFinal.Entity.Mapper.UsuarioMapper;
 import com.backProyectoFinal.Repository.UsuarioRepository;
 import com.backProyectoFinal.Service.UsuarioService;
@@ -92,33 +96,26 @@ public class UsuarioServiceImp implements UsuarioService{
         }
 
     }
-/*
 
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-
-usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
-
-passwordEncoder.matches(passwordIngresada, usuario.getPassword());
-
-
-*/ 
-
-
-
-/*    En este endpoint hacemos la validacion de las contraseñas en el if
     @Override
-    public UsuarioEditEmergencia verificarLogin(UsuarioEditEmergencia dto) {
-        Usuario u = usuarioRepository.findByEmail(dto.getEmail());
-        if(u != null && u.getContrasenia() == dto.getContrasenia()){
-            return UsuarioMapper.toLoginDto(u);
-        } else{
-            throw new RuntimeException("No se encontro un usuario con ese Email");
-        }
+    public List<PedidoDto> traerPedidos(String email) {
+        Usuario u = usuarioRepository.findByEmail(email);
+        return u.getPedidos().stream()
+            .map(PedidoMapper::toDto)
+            .toList();
+    } 
 
-    }
-*/
+      @Override
+    public List<PedidoDto> traerPedidosPorEstado(String email, EstadoPedido estado) {
+        Usuario u = usuarioRepository.findByEmail(email);
+        return u.getPedidos().stream()
+            .filter(pedido-> pedido.getEstado().equals(estado))
+            .map(PedidoMapper::toDto)
+            .collect(Collectors.toList());
+    } 
+
+
+
 
 }

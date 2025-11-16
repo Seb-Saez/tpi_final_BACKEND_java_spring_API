@@ -1,6 +1,8 @@
 package com.backProyectoFinal.Controller;
 
 import com.backProyectoFinal.Entity.Dto.usuario.UsuarioEditEmergencia;
+import com.backProyectoFinal.Entity.Enum.EstadoPedido;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("usuario")
 public class UsuarioController {
 
@@ -74,7 +76,25 @@ public ResponseEntity buscarId(@PathVariable Long id) {
         return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
     }
 }
+// Trear los pedidos de un cliente
+@GetMapping("/traerPedidos/{email}")
+public ResponseEntity traerPedidos(@PathVariable String email) {
+    try {
+        return ResponseEntity.ok().body(usuarioService.traerPedidos(email));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("No se pudo traer los pedidos");
+    }
+}
 
+// Trear los pedidos de un cliente filtrado por el estado
+@GetMapping("/traerPedidos/{email}/{estado}")
+public ResponseEntity traerPedidosPorEstado(@PathVariable String email, @PathVariable EstadoPedido estado) {
+    try {
+        return ResponseEntity.ok().body(usuarioService.traerPedidosPorEstado(email, estado));
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("No se pudo traer los pedidos");
+    }
+}
 
 // Eliminar un usuario por ID
 @DeleteMapping("/{id}")
